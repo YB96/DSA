@@ -56,5 +56,4 @@ def validMountainArray(arr):
     return i == n - 1
 arr = [0, 2, 3, 4, 5]
 print(validMountainArray(arr))
-Result = False
 ```
