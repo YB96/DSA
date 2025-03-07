@@ -36,5 +36,5 @@ while left < right:
     else:
         print("width2",width[left],width[right],"distance",right-left)
         right -= 1
-#print("area",area)
+#print("area",area) 
 print(max(area))
