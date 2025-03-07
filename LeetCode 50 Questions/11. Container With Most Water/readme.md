@@ -1,4 +1,16 @@
-### Goal:</br>
+# 11. Container With Most Water
+You are given an integer array height of length n. 
+There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+Return the maximum amount of water a container can store.
+Notice that you may not slant the container.
+
+Example1:
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. in this case, the max area of water (blue section) the container can contain is 49.
+
+## Goal:</br>
 You're trying to find the maximum area that can be formed between two lines, where the lines are represented by the width array. The area between two lines is calculated by the formula:
 
 Area = min(height[left] , height[right]) × (right − left)
@@ -24,14 +36,14 @@ Area = min(height[left] , height[right]) × (right − left)
 </details>
 
 <details>
-    <summary> Why move the shorter line? </summary></br>
+    <summary> Why move the shorter line? </summary>
 
 * The area between two lines is calculated as the minimum height of the two lines multiplied by the distance between them. 
 * If the shorter line remains fixed, moving the other pointer inward will reduce the distance but not necessarily increase the height. 
 * However, if we move the pointer at the shorter line, we increase the chances of encountering a taller line, which could increase the area.
 </details>
 
-### The Solution:
+## The Solution:
 ```
 # Example
 width = [1, 8, 6, 2, 5, 4, 8, 3, 7]  
