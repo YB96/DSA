@@ -57,3 +57,6 @@ def validMountainArray(arr):
 arr = [0, 2, 3, 4, 5]
 print(validMountainArray(arr))
 ```
+<center>
+<span style="font-size: 40px;color: #57B4BA;"> Thankyou </span> 
+ </center>
