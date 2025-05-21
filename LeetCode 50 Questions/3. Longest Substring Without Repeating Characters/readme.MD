@@ -8,7 +8,7 @@ Input: s = "abcabcbb"
 
 Output: 3
 
-Explanation: The answer is "abc", with the length of 3.
+Explanation: The answer is "abc", with the length of 3 which is max.
 
 </details> <details> <summary>Example 2:</summary>
 Input: s = "bbbbb"
