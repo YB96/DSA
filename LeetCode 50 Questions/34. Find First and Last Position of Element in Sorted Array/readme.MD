@@ -1,30 +1,36 @@
+
 # [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
-Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value.</br>
+Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value.
 
-📝 **Note:** If `target` is not found in the array, return `[-1, -1]`.</br>  
-You must write an algorithm with **O(log n)** runtime complexity.
+If `target` is not found in the array, return `[-1, -1]`.
+
+You must write an algorithm with `O(log n)` runtime complexity.
+
+---
 
 <details>
 <summary>Example 1:</summary>
 
-* Input: `nums = [5,7,7,8,8,10], target = 8`</br>
+* Input: `nums = [5,7,7,8,8,10]`, `target = 8`</br>
 * Output: `[3,4]`
 </details>
 
 <details>
 <summary>Example 2:</summary>
 
-* Input: `nums = [5,7,7,8,8,10], target = 6`</br>
+* Input: `nums = [5,7,7,8,8,10]`, `target = 6`</br>
 * Output: `[-1,-1]`
 </details>
 
 <details>
 <summary>Example 3:</summary>
 
-* Input: `nums = [], target = 0`</br>
+* Input: `nums = []`, `target = 0`</br>
 * Output: `[-1,-1]`
 </details>
+
+---
 
 ## Constraints:
 - `0 <= nums.length <= 10⁵`</br>
@@ -34,40 +40,75 @@ You must write an algorithm with **O(log n)** runtime complexity.
 
 ---
 
-## Goal:
-1. Traverse through the array and record the indexes where the target appears.</br>
-2. If the target does not exist, return `[-1, -1]`.</br>
-3. Else, return `[first_index, last_index]` using the recorded indices.</br>
+## 🔹 Solution 1: Using `index()` and reverse loop (Not O(log n), but simple)
+```python
+first_index = nums.index(target)
 
+left = 0
+right = len(nums) - 1
+while left <= right:
+    if nums[right] == target:
+        last_index = right
+        break
+    right -= 1
+
+print([first_index,last_index])
+```
 <details>
-<summary><strong style="font-size: 16px">Explanation:</strong></summary>
+<summary>Explanation</summary>
 
-* Step 1: Initialize an empty list `t1` to hold the indices of the target.
-* Step 2: Iterate through the array and add the index `i` to `t1` whenever `nums[i] == target`.
-* Step 3: If `t1` is empty, it means the target was not found, so return `[-1, -1]`.
-* Step 4: Otherwise, the result is `[min(t1), max(t1)]` representing the first and last occurrence.
 
+### 🔍 Explanation:
+- We use `index()` to get the first occurrence of the target.
+- Then, we start a reverse loop from the end of the list to find the last occurrence.
+- This is **not** O(log n) and can be slow for large inputs, but it’s a clear and simple solution.
 </details>
+
 
 ---
 
-## The Solution:
+## 🔹 Solution 2: Binary Search (Optimal - O(log n))
 ```python
-nums = [5, 7, 7, 8, 8, 10]
-target = 8
-t1 = []
+def searchRange(nums, target):
+    def findFirst(nums, target):
+        left, right = 0, len(nums) - 1
+        index = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] >= target:
+                right = mid - 1
+            else:
+                left = mid + 1
+            if nums[mid] == target:
+                index = mid
+        return index
 
-for i in range(len(nums)):
-    if nums[i] == target:
-        t1.append(i)
+    def findLast(nums, target):
+        left, right = 0, len(nums) - 1
+        index = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid - 1
+            if nums[mid] == target:
+                index = mid
+        return index
 
-if not t1:
-    t1 = [-1, -1]
-
-t2 = [min(t1), max(t1)]
-print(t1)  # All indices where target is found
-print(t2)  # First and last index of the target
+    return [findFirst(nums, target), findLast(nums, target)]
 ```
+<details>
+<summary>Explanation</summary>
+
+
+### 🔍 Explanation:
+- This approach uses binary search to find the **first** and **last** occurrences of the target value.
+- `findFirst()` focuses on the leftmost position.
+- `findLast()` focuses on the rightmost position.
+- It works efficiently in O(log n) time.
+</details>
+
 
 ---
 

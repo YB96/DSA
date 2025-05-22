@@ -28,7 +28,8 @@
 # -109 <= target <= 109
 
 
-nums = [5, 7, 7, 8, 8, 10]
+nums = [5, 7, 7, 8, 8, 10,13,73,8,89]
+nums = sorted(nums)
 target = 8
 t1 = []
 
@@ -44,3 +45,75 @@ if not t1:
 t2 = [min(t1),max(t1)]
 print(t1)
 print(t2)
+
+print("Second Solution")
+
+nums = [5, 7, 7, 8, 8,8 ,8,8,8,10,13,73,8,89]
+nums = sorted(nums)
+target = 8
+
+first_index = nums.index(target)
+
+left = 0
+right = len(nums) - 1
+while left <= right:
+    #print(nums[right])
+    if nums[right] == target:
+        last_index = right
+        break
+    right -= 1
+
+print([first_index,last_index])
+
+print("Solution 3")
+
+
+mid = len(nums)//2
+# print(len(nums))
+# print(mid)
+print(nums[:mid])
+print(nums[mid:len(nums)])
+
+print("-----------------------------------------")
+
+print(nums[:mid])
+
+indexes = []
+left = 0
+right = len(nums)
+while left < mid:
+    print(nums[left])
+    if nums[left] == target:
+        indexes.append(left)
+        print("Index is ",left)
+    left += 1
+
+
+
+def findLeft(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
+
+def findRight(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] <= target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return right
+
+left = findLeft(nums, target)
+right = findRight(nums, target)
+
+if left <= right:
+    print([left, right])
+else:
+    print([-1, -1])
